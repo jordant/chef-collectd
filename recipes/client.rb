@@ -20,8 +20,15 @@
 include_recipe "collectd"
 
 servers = []
-search(:node, 'recipes:collectd\\:\\:server') do |n|
-  servers << n['fqdn']
+
+if node["collectd"]["servers"].empty?
+  search(:node, 'recipes:collectd\\:\\:server') do |n|
+    servers << n['fqdn']
+  end
+else
+  node["collectd"]["servers"].each do|s|
+    servers << s
+  end
 end
 
 if servers.empty?
