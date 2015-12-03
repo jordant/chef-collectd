@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+default[:collectd][:hostname] = node['fqdn']
+default[:collectd][:fqdn_lookup] = "true"
 default[:collectd][:base_dir] = "/var/lib/collectd"
 default[:collectd][:plugin_dir] = "/usr/lib/collectd"
 default[:collectd][:types_db] = ["/usr/share/collectd/types.db"]
